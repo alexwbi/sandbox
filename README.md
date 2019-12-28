@@ -33,3 +33,27 @@ NumPy is consistently ~1 order of magnitude faster.
 Before using `np.where()` to replace zeros (zero distance between a point and itself), I was using list/filter inside
 the final dict comprehension, which was contributing 10% of overall time (through %lprun). Switching to `np.where()`
 improved performance by another ~10%.
+
+
+### Logistic regression from scratch
+Inspired by Nick Becker. Github: @beckernick
+https://beckernick.github.io/logistic-regression-from-scratch/
+
+##### Results / Takeaways
+Using all default parameters, gradient descent reached convergence in 163 iterations.
+
+- Iteration 0. Cross entropy loss: 0.5123195409784311
+- Iteration 100. Cross entropy loss: 0.46516682845075313
+- Iteration 163. Cross entropy loss: 0.4651664631221388
+
+```
+Confusion matrix - custom model:
+[[5047 4953]
+ [  76 9924]]
+Accuracy - custom_model: 0.74855
+
+Confusion matrix - scikit-learn:
+[[5046 4954]
+ [  76 9924]]
+Accuracy - scikit-learn: 0.7485
+```
