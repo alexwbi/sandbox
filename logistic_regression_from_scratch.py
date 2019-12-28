@@ -3,6 +3,11 @@ import numpy as np
 DEFAULT_COVARIANCE = [[1, 2], [2, 1]]
 
 
+def predict(x, weights, intercept):
+    p_success = np.array([_sigmoid(x.dot(weights) + intercept)])
+    return np.where(p_success > 0.5, 1, 0)
+
+
 def _generate_data(random_seed=10):
     np.random.seed(random_seed)
     a = np.random.multivariate_normal(mean=[0, 0], cov=DEFAULT_COVARIANCE, size=N)
