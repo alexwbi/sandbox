@@ -34,8 +34,11 @@ def fast_knn(datapoints, k=3):
     all_pairwise_distances = datapoints[:, np.newaxis] - datapoints[np.newaxis]
     l2_distance = np.sqrt((all_pairwise_distances ** 2).sum(axis=2))
     l2_distance = l2_distance[l2_distance > 0]
-    l2_distance.argpartition(k, axis=1)
-    return l2_distance[:,:3]
+    neighbors = l2_distance.argpartition(k+1, axis=1)[:, :k+1]  # Each point's nearest neighbor will be itself
+    return {
+        index: list(filter(lambda neighbor_index: neighbor_index != index, neighbors))
+        for index, neighbors in enumerate(neighbors)
+    }
 
 
 def _l2_distance(point_1, point_2):
