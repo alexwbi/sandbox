@@ -13,7 +13,7 @@ def slow_knn(datapoints, k=3):
     Given datapoints and k as inputs, return a dictionary mapping the
     index of each datapoint to the index of its k nearest neighbors.
     """
-    if k > n:
+    if k > len(datapoints):
         raise ValueError('k must be less than or equal to n')
 
     nearest_neighbors = {}
@@ -27,6 +27,11 @@ def slow_knn(datapoints, k=3):
         nearest_neighbors[index] = closest_points
 
     return nearest_neighbors
+
+
+def fast_knn(datapoints, k=3):
+    """ KNN implemented in numpy with vectorized operations """
+    
 
 
 def _l2_distance(point_1, point_2):
