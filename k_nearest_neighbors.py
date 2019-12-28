@@ -7,12 +7,15 @@ def generate_datapoints(n, dim=2, random_state=1):
     return np.random.randn(n, dim)
 
 
-def slow_knn(n, k=3):
-    """ KNN implemented in python """
+def slow_knn(datapoints, k=3):
+    """
+    KNN implemented in python.
+    Given datapoints and k as inputs, return a dictionary mapping the
+    index of each datapoint to the index of its k nearest neighbors.
+    """
     if k > n:
         raise ValueError('k must be less than or equal to n')
 
-    datapoints = generate_datapoints(n)
     nearest_neighbors = {}
     for index, point in enumerate(datapoints):
         neighbors_and_distances = [
