@@ -17,11 +17,6 @@ def _generate_data(random_seed=10):
     return x, y
 
 
-def _derivative(x, y, p):
-    """ Given input x, output y, and probability p, calculate first derivative of likelihood function """
-    return sum((y - p) * x)
-
-
 def _cross_entropy_loss(y_pred, y_actual):
     return -np.mean(y_actual * np.log(y_pred) + (1 - y_actual) * np.log(1 - y_pred))
 
