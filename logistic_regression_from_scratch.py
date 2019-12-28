@@ -3,19 +3,28 @@ import numpy as np
 DEFAULT_COVARIANCE = [[1, 2], [2, 1]]
 
 
-def fit(X, y, random_seed, include_intercept=True, num_iterations=100000, min_threshold=1e-4):
+def fit(X, y, random_seed, include_intercept=True, learning_rate = 1e-5, num_iterations=100000, min_threshold=1e-4):
+    np.random.seed(random_seed)
     if include_intercept:
         intercept = np.ones((X.shape[0], 1))
         X = np.hstack((intercept, X))
 
-    initial_weights = np.random.random((X.shape[1], 1))
-    initial_bias = 0.5
-
-    initial_weights = np.random
-    intercept =
+    weights = np.random.random((X.shape[1], 1))
     for i in range(num_iterations):
+        scores = X.dot(weights)
+        y_pred = _sigmoid(scores)
+        error = y - y_pred
+        gradient = features.T.dot(error)
 
-    pass
+        delta_weights = learning_rate * gradient
+        if delta_weights < min_threshold:
+            break
+
+        weights += delta_weights
+        if i % 100 == 0:
+            print(f'Iteration {i}. Cross entropy loss: {_cross_entropy_loss(y_pred, y)}')
+
+    return weights
 
 
 def predict(x, weights, intercept):
@@ -41,11 +50,10 @@ def _sigmoid(x):
 
 
 if __name__ == '__main__':
-    random_state = 10
+    random_seed = 10
     n = 10000
 
-    np.random.seed(random_state)
-    X, y = _generate_data(n, random_state)
-    fit(X, y, random_state)
+    X, y = _generate_data(n, random_seed)
+    fit(X, y, random_seed)
 
 
