@@ -10,3 +10,7 @@ def _generate_data(random_seed=10):
     x = np.vstack((a, b))
     y = np.hstack((np.zeros(N), np.ones(N)))
     return x, y
+
+
+def _sigmoid(x):
+    return 1 / (1 + np.exp(-x))
