@@ -1,5 +1,5 @@
 # sandbox
-place to try stuff out
+Random experiments
 
 
 ### KNN timing tests
