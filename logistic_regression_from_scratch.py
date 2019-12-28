@@ -1,10 +1,10 @@
 import numpy as np
 
 DEFAULT_COVARIANCE = [[1, 2], [2, 1]]
+np.random.seed(10)
 
 
-def fit(X, y, random_seed, include_intercept=True, learning_rate = 1e-5, num_iterations=100000, min_threshold=1e-4):
-    np.random.seed(random_seed)
+def fit(X, y, include_intercept=True, learning_rate=1e-5, num_iterations=100000, min_threshold=1e-4):
     if include_intercept:
         intercept = np.ones((X.shape[0], 1))
         X = np.hstack((intercept, X))
@@ -14,10 +14,10 @@ def fit(X, y, random_seed, include_intercept=True, learning_rate = 1e-5, num_ite
         scores = X.dot(weights)
         y_pred = _sigmoid(scores)
         error = y - y_pred
-        gradient = features.T.dot(error)
+        gradient = X.T.dot(error)
 
         delta_weights = learning_rate * gradient
-        if delta_weights < min_threshold:
+        if np.linalg.norm(delta_weights) < min_threshold:
             break
 
         weights += delta_weights
@@ -32,12 +32,11 @@ def predict(x, weights, intercept):
     return np.where(p_success > 0.5, 1, 0)
 
 
-def _generate_data(n, random_seed):
-    np.random.seed(random_seed)
+def _generate_data(n):
     a = np.random.multivariate_normal(mean=[0, 0], cov=DEFAULT_COVARIANCE, size=n)
     b = np.random.multivariate_normal(mean=[2, 2], cov=DEFAULT_COVARIANCE, size=n)
     x = np.vstack((a, b))
-    y = np.hstack((np.zeros(N), np.ones(N)))
+    y = np.hstack((np.zeros(n), np.ones(n)))
     return x, y
 
 
@@ -50,10 +49,8 @@ def _sigmoid(x):
 
 
 if __name__ == '__main__':
-    random_seed = 10
-    n = 10000
-
-    X, y = _generate_data(n, random_seed)
-    fit(X, y, random_seed)
+    X, y = _generate_data(10000)
+    weights = fit(X, y)
+    print(weights)
 
 
