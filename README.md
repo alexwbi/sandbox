@@ -6,7 +6,7 @@ Random experiments
 - Code is in `k_nearest_neighbors_timing_experiments.py`
 - k = 3 in all cases
 - Inspired by Jake VanderPlas. Github: @jakevdp
-https://jakevdp.github.io/PythonDataScienceHandbook/02.08-sorting.html
+    - https://jakevdp.github.io/PythonDataScienceHandbook/02.08-sorting.html
 
 
 ##### Python implementation:
