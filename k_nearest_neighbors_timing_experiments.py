@@ -33,11 +33,9 @@ def fast_knn(datapoints, k=3):
     """ KNN implemented in numpy with vectorized operations """
     all_pairwise_distances = datapoints[:, np.newaxis] - datapoints[np.newaxis]
     l2_distance = np.sqrt((all_pairwise_distances ** 2).sum(axis=2))
-    neighbors = l2_distance.argpartition(k+1, axis=1)[:, :k+1]  # Each point's nearest neighbor will be itself
-    return {
-        index: list(filter(lambda neighbor_index: neighbor_index != index, neighbors))
-        for index, neighbors in enumerate(neighbors)
-    }
+    l2_distance = np.where(l2_distance == 0, np.inf, l2_distance)  # Prevent each point from being its own neighbor
+    nearest_neighbors = l2_distance.argpartition(1, axis=1)[:, :k]
+    return {index: neighbors for index, neighbors in enumerate(nearest_neighbors)}
 
 
 def _l2_distance(point_1, point_2):
