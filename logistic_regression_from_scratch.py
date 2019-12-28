@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.metrics import confusion_matrix, accuracy_score
 
 DEFAULT_COVARIANCE = [[1, 2], [2, 1]]
 np.random.seed(10)
@@ -18,18 +19,19 @@ def fit(X, y, include_intercept=True, learning_rate=1e-5, num_iterations=100000,
 
         delta_weights = learning_rate * gradient
         if np.linalg.norm(delta_weights) < min_threshold:
+            print(f'Iteration {i}. Cross entropy loss: {_cross_entropy_loss(y_pred, y)}')
             break
 
         weights += delta_weights
         if i % 100 == 0:
             print(f'Iteration {i}. Cross entropy loss: {_cross_entropy_loss(y_pred, y)}')
 
-    return weights
+    return X, y, weights
 
 
-def predict(x, weights, intercept):
-    p_success = np.array([_sigmoid(x.dot(weights) + intercept)])
-    return np.where(p_success > 0.5, 1, 0)
+def predict(x, weights, p_threshold=0.5):
+    probability = np.array([_sigmoid(x.dot(weights))])
+    return np.where(probability > p_threshold, 1, 0)[0]
 
 
 def _generate_data(n):
@@ -50,7 +52,7 @@ def _sigmoid(x):
 
 if __name__ == '__main__':
     X, y = _generate_data(10000)
-    weights = fit(X, y)
-    print(weights)
-
-
+    X, y, weights = fit(X, y)
+    y_pred = predict(X, weights)
+    print(confusion_matrix(y, y_pred))
+    print(f'Accuracy: {accuracy_score(y, y_pred)}')
