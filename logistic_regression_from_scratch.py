@@ -54,6 +54,7 @@ if __name__ == '__main__':
     print(f'Confusion matrix - custom model:\n{confusion_matrix(y, y_pred)}')
     print(f'Accuracy - custom_model: {accuracy_score(y, y_pred)}')
 
+    # Set high C to effectively turn off regularization
     sklearn_logistic_regression = LogisticRegression(fit_intercept=False, C=1e10, solver='lbfgs')
     sklearn_logistic_regression.fit(X, y)
     y_pred_sklearn = sklearn_logistic_regression.predict(X)
