@@ -19,15 +19,17 @@ n = 1000: `6.18 s ± 137 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)`
 
 
 ##### NumPy implementation:
-n = 10: `34.8 µs ± 375 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)`
+n = 10: `23.4 µs ± 2.3 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)`
 
-n = 100: `566 µs ± 58.6 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)`
+n = 100: `330 µs ± 22.6 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)`
 
-n = 1000: `37.9 ms ± 1.53 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)`
+n = 1000: `32.2 ms ± 1.47 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)`
 
-n = 10000: `6.16 s ± 80.8 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)`
+n = 10000: `5.66 s ± 167 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)`
 
+##### A few takeaways
 NumPy is consistently ~1 order of magnitude faster.
 
-Also, the final dict comprehension and filter contributes 10% of overall time, even though the data is much smaller
-than in the previous NumPy operations.
+Before using `np.where()` to replace zeros (zero distance between a point and itself), I was using list/filter inside
+the final dict comprehension, which was contributing 10% of overall time (through %lprun). Switching to `np.where()`
+improved performance by another ~10%.
