@@ -7,6 +7,8 @@ Inspired by Jake VanderPlas. Github: @jakevdp
 https://jakevdp.github.io/PythonDataScienceHandbook/02.08-sorting.html
 
 ##### Implemented in python:
+k = 3 in all cases
+
 n = 10:
 `550 µs ± 4.58 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)`
 
