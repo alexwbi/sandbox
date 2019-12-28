@@ -3,7 +3,18 @@ import numpy as np
 DEFAULT_COVARIANCE = [[1, 2], [2, 1]]
 
 
-def fit(X, y, weights, bias, num_iterations=1000, min_threshold=1e-4):
+def fit(X, y, random_seed, include_intercept=True, num_iterations=100000, min_threshold=1e-4):
+    if include_intercept:
+        intercept = np.ones((X.shape[0], 1))
+        X = np.hstack((intercept, X))
+
+    initial_weights = np.random.random((X.shape[1], 1))
+    initial_bias = 0.5
+
+    initial_weights = np.random
+    intercept =
+    for i in range(num_iterations):
+
     pass
 
 
@@ -35,7 +46,6 @@ if __name__ == '__main__':
 
     np.random.seed(random_state)
     X, y = _generate_data(n, random_state)
+    fit(X, y, random_state)
 
-    initial_weights = np.random.random((X.shape[1], 1))
-    initial_bias = 0.5
 
