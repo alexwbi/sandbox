@@ -31,7 +31,11 @@ def slow_knn(datapoints, k=3):
 
 def fast_knn(datapoints, k=3):
     """ KNN implemented in numpy with vectorized operations """
-    
+    all_pairwise_distances = datapoints[:, np.newaxis] - datapoints[np.newaxis]
+    l2_distance = np.sqrt((all_pairwise_distances ** 2).sum(axis=2))
+    l2_distance = l2_distance[l2_distance > 0]
+    l2_distance.argpartition(k, axis=1)
+    return l2_distance[:,:3]
 
 
 def _l2_distance(point_1, point_2):
