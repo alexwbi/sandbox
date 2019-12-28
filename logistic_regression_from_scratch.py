@@ -34,7 +34,7 @@ def predict(x, weights, p_threshold=0.5):
     return np.where(probability > p_threshold, 1, 0)[0]
 
 
-def _generate_data(n):
+def generate_data(n):
     a = np.random.multivariate_normal(mean=[0, 0], cov=DEFAULT_COVARIANCE, size=n)
     b = np.random.multivariate_normal(mean=[2, 2], cov=DEFAULT_COVARIANCE, size=n)
     x = np.vstack((a, b))
@@ -51,7 +51,7 @@ def _sigmoid(x):
 
 
 if __name__ == '__main__':
-    X, y = _generate_data(10000)
+    X, y = generate_data(10000)
     X, y, weights = fit(X, y)
     y_pred = predict(X, weights)
     print(confusion_matrix(y, y_pred))
