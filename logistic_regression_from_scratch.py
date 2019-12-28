@@ -4,12 +4,12 @@ DEFAULT_COVARIANCE = [[1, 2], [2, 1]]
 np.random.seed(10)
 
 
-def fit(X, y, include_intercept=True, learning_rate=1e-5, num_iterations=100000, min_threshold=1e-4):
+def fit(X, y, include_intercept=True, learning_rate=1e-5, num_iterations=100000, min_threshold=1e-5):
     if include_intercept:
         intercept = np.ones((X.shape[0], 1))
         X = np.hstack((intercept, X))
 
-    weights = np.random.random((X.shape[1], 1))
+    weights = np.random.random(X.shape[1])
     for i in range(num_iterations):
         scores = X.dot(weights)
         y_pred = _sigmoid(scores)
