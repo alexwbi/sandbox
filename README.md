@@ -3,10 +3,10 @@ place to try stuff out
 
 
 ### KNN timing tests
-Inspired by Jake VanderPlas. Github: @jakevdp
+- Code is in `k_nearest_neighbors_timing_experiments.py`
+- k = 3 in all cases
+- Inspired by Jake VanderPlas. Github: @jakevdp
 https://jakevdp.github.io/PythonDataScienceHandbook/02.08-sorting.html
-
-k = 3 in all cases
 
 
 ##### Python implementation:
