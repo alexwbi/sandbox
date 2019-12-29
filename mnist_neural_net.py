@@ -24,7 +24,9 @@ class NN(object):
         :param mini_batch_size: mini batch size
         """
         for i in range(epochs):
+            np.random.shuffle(X)
             mini_batches = np.array_split(X, mini_batch_size)
+            [self._calculate_gradient(mini_batch, eta) for mini_batch in mini_batches]
 
     def _initial_weights(self):
         num_neurons_in_consecutive_layers = zip(self.neurons_per_layer[:-1], self.neurons_per_layer[1:])
