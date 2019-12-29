@@ -19,3 +19,7 @@ class NN(object):
         non_initial_layer_neurons = self.neurons_per_layer[1:]
         biases = np.random.standard_normal(non_initial_layer_neurons.sum())
         return np.split(biases, non_initial_layer_neurons[:-1])
+
+    @staticmethod
+    def _sigmoid(x):
+        return 1 / (1 + np.exp(-x))
