@@ -11,6 +11,11 @@ class NN(object):
         self.weights = self._initial_weights()
         self.biases = self._initial_biases()
 
+    def feedforward(self, a):
+        for b, w in zip(self.biases, self.weights):
+            a = self._sigmoid(a.dot(b) + w)
+        return a
+
     def _initial_weights(self):
         num_neurons_in_consecutive_layers = zip(self.neurons_per_layer[:-1], self.neurons_per_layer[1:])
         return [np.random.standard_normal((y, x)) for x, y in num_neurons_in_consecutive_layers]
