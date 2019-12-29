@@ -16,6 +16,16 @@ class NN(object):
             a = self._sigmoid(a.dot(b) + w)
         return a
 
+    def stochastic_gradient_descent(self, X, epochs, eta, mini_batch_size):
+        """
+        :param X: training data
+        :param epochs: number of epochs
+        :param eta: learning rate
+        :param mini_batch_size: mini batch size
+        """
+        for i in range(epochs):
+            mini_batches = np.array_split(X, mini_batch_size)
+
     def _initial_weights(self):
         num_neurons_in_consecutive_layers = zip(self.neurons_per_layer[:-1], self.neurons_per_layer[1:])
         return [np.random.standard_normal((y, x)) for x, y in num_neurons_in_consecutive_layers]
