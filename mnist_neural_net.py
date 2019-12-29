@@ -39,10 +39,10 @@ class NN(object):
         batch_size = len(mini_batch)
         # Divide by batch_size to average the changes across all datapoints in the batch
         self.biases = [b - (eta / batch_size) * d_b for b, d_b in zip(self.biases, delta_b)]
-
+        self.weights = [w - (eta / batch_size) * d_w for w, d_w in zip(self.weights, delta_w)]
 
     def _backpropagation(self, x, y):
-        return x, y  # TODO
+        return 0.01, -0.01  # TODO
 
     def _initial_weights(self):
         num_neurons_in_consecutive_layers = zip(self.neurons_per_layer[:-1], self.neurons_per_layer[1:])
