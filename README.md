@@ -47,13 +47,6 @@ Using all default parameters, gradient descent reached convergence in 163 iterat
 - Iteration 163. Cross entropy loss: 0.4651664631221388
 
 ```
-Confusion matrix - custom model:
-[[5047 4953]
- [  76 9924]]
 Accuracy - custom_model: 0.74855
-
-Confusion matrix - scikit-learn:
-[[5046 4954]
- [  76 9924]]
 Accuracy - scikit-learn: 0.7485
 ```
